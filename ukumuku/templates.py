@@ -11,7 +11,9 @@ templates_directories = []
 for directory in os.listdir(settings.BASE_LOOKUP_DIR):
     sub_directory = os.path.join(settings.BASE_LOOKUP_DIR, directory, 'templates')
     if directory == 'templates':
-        templates_directories.append(directory)
+        templates_directories.append(
+            os.path.join(settings.BASE_LOOKUP_DIR, directory)
+        )
     elif os.path.isdir(sub_directory):
         templates_directories.append(sub_directory)
 template_lookup = TemplateLookup(directories=templates_directories)

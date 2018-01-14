@@ -1,5 +1,6 @@
 from falcon.response import Response, ResponseOptions
 from .status_codes import *
+from .templates import render_template
 
 
 class HttpResponse(Response):
@@ -60,4 +61,11 @@ class JSONResponse():
     pass
 
 class TemplateResponse():
-    pass
+    def __init__(
+        self, template_name, context,
+        status=HTTP_200, headers={}, options=None
+    ):
+        super(TemplateResponse, self).__init__(
+            render_template(template_name, context),
+            status, headers, options
+        )

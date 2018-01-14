@@ -1,2 +1,2 @@
 
-BASE_LOOKUP_DIR = './tests'
+BASE_LOOKUP_DIR = './tests/test_responses'
