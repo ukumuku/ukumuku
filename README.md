@@ -1,6 +1,6 @@
 # Ukumuku
 
-Microframeowrk for Python based on Falcon
+Microframeowrk for Python 3 based on Falcon
 
 ## Run tests
 

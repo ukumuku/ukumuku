@@ -1,3 +1,5 @@
+import json
+
 from falcon.response import Response, ResponseOptions
 from .status_codes import *
 from .templates import render_template
@@ -5,12 +7,10 @@ from .templates import render_template
 
 class HttpResponse(Response):
 
-    content_type = 'text/html'
-
     def __init__(
         self, body, 
-        status=HTTP_200, content_type='text/html', 
-        headers={}, options=None
+        status=HTTP_200, 
+        headers={}, content_type=None, options=None
     ):
         self.status = status
         self._headers = {}
@@ -57,15 +57,25 @@ class HttpResponse(Response):
         resp._headers = self._headers
         
 
-class JSONResponse():
-    pass
+class JSONResponse(HttpResponse):
+    def __init__(
+        self, context,
+        status=HTTP_200, headers={}, 
+        content_type='application/json', options=None
+    ):
+        super(JSONResponse, self).__init__(
+            json.dumps(context),
+            status, headers, content_type, options
+        )
 
-class TemplateResponse():
+
+class TemplateResponse(HttpResponse):
     def __init__(
         self, template_name, context,
-        status=HTTP_200, headers={}, options=None
+        status=HTTP_200, headers={}, 
+        content_type='text/html', options=None
     ):
         super(TemplateResponse, self).__init__(
             render_template(template_name, context),
-            status, headers, options
+            status, headers, content_type, options
         )
