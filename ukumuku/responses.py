@@ -2,7 +2,7 @@ import json
 
 from falcon.response import Response, ResponseOptions
 from .status_codes import *
-from .templates import render_template
+from .templates import template_engine
 
 
 class HttpResponse(Response):
@@ -76,6 +76,6 @@ class TemplateResponse(HttpResponse):
         content_type='text/html', options=None
     ):
         super(TemplateResponse, self).__init__(
-            render_template(template_name, context),
+            template_engine.render_template(template_name, context),
             status, headers, content_type, options
         )

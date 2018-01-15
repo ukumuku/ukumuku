@@ -14,7 +14,7 @@ class TestTemplates(unittest.TestCase):
 
     def test_simple_render_template(self):
         load_settings('test_templates/settings.py')
-        import ukumuku.templates
+        from ukumuku.templates import template_engine
 
-        result = ukumuku.templates.render_template('index.html', {'name' : 'Andrix'})
+        result = template_engine.render_template('index.html', {'name' : 'Andrix'})
         self.assertEqual(result, 'Hello, Andrix!')

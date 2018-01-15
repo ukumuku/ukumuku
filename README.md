@@ -1,6 +1,6 @@
 # Ukumuku
 
-Microframeowrk for Python 3 based on Falcon
+Microframework for Python 3 based on Falcon
 
 ## Run tests
 
