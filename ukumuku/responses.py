@@ -8,7 +8,7 @@ from .templates import template_engine
 class HttpResponse(Response):
 
     def __init__(
-        self, body, 
+        self, body='', 
         status=HTTP_200, 
         headers={}, content_type=None, options=None
     ):

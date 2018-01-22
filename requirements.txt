@@ -5,4 +5,4 @@ python-mimeparse==1.6.0
 six==1.11.0
 wheel==0.24.0
 Mako==1.0.7
-https://github.com/falconry/falcon/archive/1.4.0rc1.zip
+falcon==1.4.1
