@@ -4,22 +4,22 @@ from ukumuku.responses import HttpResponse
 class View:
 
     def get(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def post(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def put(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def patch(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def delete(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def head(self, req, **kwargs):
-        return HttpResponse(status_codes.HTTP_405)
+        return HttpResponse(status=status_codes.HTTP_501)
 
     def on_get(self, req, resp, **kwargs):
         self.get(req, **kwargs).to_response(resp)
