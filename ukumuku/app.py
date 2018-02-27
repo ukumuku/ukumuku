@@ -10,7 +10,10 @@ class App(falcon.API):
         for static_dir in settings.STATIC_DIRS:
             self.add_static_route(settings.STATIC_URL, static_dir)
 
-    def add_routes(self, urls_module_path):
+    def add_routes(self, urls_module_path, prefix=''):
         urls_module = importlib.import_module(urls_module_path)
         for url in urls_module.urls:
-            self.add_route(url[0], url[1])
+            if prefix:
+                self.add_route(prefix + url[0], url[1])
+            else:
+                self.add_route(url[0], url[1])
