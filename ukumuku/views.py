@@ -1,6 +1,7 @@
 import ukumuku.status_codes as status_codes
 from ukumuku.responses import HttpResponse
 
+
 class View:
 
     def get(self, req, **kwargs):
@@ -21,6 +22,9 @@ class View:
     def head(self, req, **kwargs):
         return HttpResponse(status=status_codes.HTTP_501)
 
+    def options(self, req, **kwargs):
+        return HttpResponse(status=status_codes.HTTP_501)
+
     def on_get(self, req, resp, **kwargs):
         self.get(req, **kwargs).to_response(resp)
 
@@ -38,3 +42,6 @@ class View:
 
     def on_head(self, req, resp, **kwargs):
         self.head(req, **kwargs).to_response(resp)
+
+    def on_options(self, req, resp, **kwargs):
+        self.options(req, **kwargs).to_response(resp)

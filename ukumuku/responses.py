@@ -8,8 +8,8 @@ from .templates import template_engine
 class HttpResponse(Response):
 
     def __init__(
-        self, body='', 
-        status=HTTP_200, 
+        self, body='',
+        status=HTTP_200,
         headers={}, content_type=None, options=None
     ):
         self.status = status
@@ -42,7 +42,7 @@ class HttpResponse(Response):
         pass
         resp.status = self.status
         resp.content_type = self.content_type
-        
+
         if self._options:
             resp.options = self._options
 
@@ -50,17 +50,33 @@ class HttpResponse(Response):
         resp.data = self.data
         resp.stream = self.stream
         resp.stream_len = self.stream_len
-        resp.context = self.context
 
-        resp._cookies = self._cookies
-        resp._media = self._media
-        resp._headers = self._headers
-        
+        if resp.context:
+            resp.context.update(self.context)
+        else:
+            resp.context = self.context
+
+        if resp._cookies:
+            resp._cookies.update(self._cookies)
+        else:
+            resp._cookies = self._cookies
+
+        if resp._media:
+            resp._media.update(self._media)
+        else:
+            resp._media = self._media
+
+        # Works with middleware
+        if resp._headers:
+            resp._headers.update(self._headers)
+        else:
+            resp._headers = self._headers
+
 
 class JSONResponse(HttpResponse):
     def __init__(
         self, context,
-        status=HTTP_200, headers={}, 
+        status=HTTP_200, headers={},
         content_type='application/json', options=None
     ):
         super(JSONResponse, self).__init__(
@@ -72,7 +88,7 @@ class JSONResponse(HttpResponse):
 class TemplateResponse(HttpResponse):
     def __init__(
         self, template_name, context,
-        status=HTTP_200, headers={}, 
+        status=HTTP_200, headers={},
         content_type='text/html', options=None
     ):
         super(TemplateResponse, self).__init__(
